@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useActionState } from "react"
 import { useFormStatus } from "react-dom"
-import { login } from "@/app/actions/auth"
+import { login } from "@/app/lib/actions/auth"
 import { useForm } from "react-hook-form"
 import { useState } from "react"
 import { Eye, EyeOff } from "lucide-react"
