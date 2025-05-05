@@ -35,7 +35,7 @@ type FormValues = {
   remember: boolean
 }
 
-export function LoginForm() {
+export default function LoginForm() {
   const [state, formAction] = useActionState(login, initialState)
   const [showPassword, setShowPassword] = useState(false)
 
@@ -52,9 +52,13 @@ export function LoginForm() {
   })
 
   // This function will be called when the form is valid
-  const onSubmit = (data: FormData) => {
-    formAction(data)
-  }
+  const onSubmit = (data: FormValues) => {
+    const formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("remember", data.remember.toString());
+    formAction(formData);
+  };
 
   return (
     <form action={formAction} className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -68,9 +72,8 @@ export function LoginForm() {
           id="email"
           type="email"
           placeholder="Enter your email address"
-          className={`w-full rounded bg-[#1d1d21] px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6b61d2] ${
-            errors.email ? "border border-red-500" : ""
-          }`}
+          className={`w-full rounded bg-[#1d1d21] px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6b61d2] ${errors.email ? "border border-red-500" : ""
+            }`}
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -91,9 +94,8 @@ export function LoginForm() {
             id="password"
             type={showPassword ? "text" : "password"}
             placeholder="Enter your password"
-            className={`w-full rounded bg-[#1d1d21] px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6b61d2] ${
-              errors.password ? "border border-red-500" : ""
-            }`}
+            className={`w-full rounded bg-[#1d1d21] px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6b61d2] ${errors.password ? "border border-red-500" : ""
+              }`}
             {...register("password", {
               required: "Password is required",
               minLength: {
