@@ -1,14 +1,8 @@
-"use client"
+import type { ButtonHTMLAttributes, ReactNode } from "react"
 
-import type { ReactNode } from "react"
-
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
-  type?: "button" | "submit" | "reset"
   variant?: "primary" | "secondary" | "outline"
-  className?: string
-  disabled?: boolean
-  onClick?: () => void
   fullWidth?: boolean
 }
 
@@ -18,8 +12,8 @@ export function Button({
   variant = "primary",
   className = "",
   disabled = false,
-  onClick,
   fullWidth = false,
+  ...props
 }: ButtonProps) {
   const baseClasses = "rounded py-3 font-medium transition-colors"
   const widthClasses = fullWidth ? "w-full" : ""
@@ -35,7 +29,7 @@ export function Button({
       type={type}
       className={`${baseClasses} ${variantClasses[variant]} ${widthClasses} ${className}`}
       disabled={disabled}
-      onClick={onClick}
+      {...props}
     >
       {children}
     </button>
