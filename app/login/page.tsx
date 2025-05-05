@@ -1,18 +1,39 @@
+import { Logo } from '@/app/ui/logo';
 import LoginForm from '@/app/ui/login/login-form';
-import { Suspense } from 'react';
+import { Testimonial } from '@/app/ui/testimonal';
 
 export default function LoginPage() {
-    return (
-      <main className="flex items-center justify-center md:h-screen">
-        <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
-          <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
-            <div className="w-32 text-white md:w-36">
-            </div>
-          </div>
-          <Suspense>
-            <LoginForm />
-          </Suspense>
+  return (
+    <div className="flex min-h-screen bg-[#171717]">
+      <div className="flex flex-col justify-center px-8 md:px-16 lg:w-1/2">
+        <div className="mb-12">
+          <Logo />
         </div>
-      </main>
-    );
-  }
+
+        <div className="mb-8">
+          <h1 className="mb-4 text-4xl font-bold text-white">Welcome back to Room.me!</h1>
+          <p className="text-lg text-gray-300">
+            Room.me is an innovative video conference product that revolutionizes virtual meetings.
+          </p>
+        </div>
+
+        <LoginForm />
+      </div>
+
+      <div className="hidden relative lg:block lg:w-1/2">
+        <div className="absolute inset-0 bg-black/20 z-10"></div>
+        <img
+          src="/placeholder.svg?height=900&width=700"
+          alt="People in a video conference"
+          className="h-full w-full object-cover"
+        />
+        <Testimonial
+          quote="We love the screen sharing and whiteboarding features, which have improved our presentations. Room.me has become an essential tool for our team, allowing us to collaborate effectively. Highly recommended!"
+          author="Sarah Markivoc"
+          position="Project Manager"
+          activeIndex={0}
+        />
+      </div>
+    </div>
+  )
+}
